@@ -7,22 +7,30 @@
 
 <h2>@ViewData["Title"]</h2>
 
-
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>
-                Customer
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Customers) {
-        <tr>
-            <td>
-                <a asp-controller="Customers" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-            </td>
-        </tr>
+@if (Model.Customers.Count == 0)
+{
+    <p>We don't have any customers yet.</p>
 }
-    </tbody>
-</table>
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Customer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Customers)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Customers" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
