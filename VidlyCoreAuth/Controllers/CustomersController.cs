@@ -10,18 +10,25 @@ namespace VidlyCoreAuth.Controllers
 {
     public class CustomersController : Controller
     {
-        public IActionResult Index()
-        {
-            var customers = new List<Customer>() {
+        private List<Customer> customers = new List<Customer>() {
                 new Customer { Name = "John Smith", Id = 1 },
                 new Customer { Name = "Mary Williams" , Id = 2}
             };
 
+        public IActionResult Index()
+        {
             var viewModel = new CustomerViewModel() {
                 Customers = customers
             };
 
             return View(viewModel);
+        }
+
+        [Route("customers/details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var customer = customers.FirstOrDefault(cust => cust.Id == id);
+            return View(customer);
         }
     }
 }
