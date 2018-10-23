@@ -11,9 +11,10 @@ using VidlyCoreAuth.Data;
 namespace VidlyCoreAuth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181023083933_CreateCustomerAndMovie")]
+    partial class CreateCustomerAndMovie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
