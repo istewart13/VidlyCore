@@ -1,0 +1,36 @@
+﻿@model VidlyCoreAuth.ViewModels.MovieViewModel
+
+@{
+    ViewData["Title"] = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Movies.Any())
+{
+    <p>We don't have any movies yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Movie
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Movies)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Movies" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
