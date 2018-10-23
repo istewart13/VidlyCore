@@ -10,13 +10,10 @@ namespace VidlyCoreAuth.Controllers
 {
     public class MoviesController : Controller
     {
-        private List<Movie> movies = new List<Movie>() {
-                new Movie { Name = "Shrek", Id = 1 },
-                new Movie { Name = "Wall-e" , Id = 2}
-            };
-
         public IActionResult Index()
         {
+            var movies = GetMovies();
+
             var viewModel = new MovieViewModel()
             {
                 Movies = movies
@@ -28,7 +25,7 @@ namespace VidlyCoreAuth.Controllers
         [Route("movies/details/{id}")]
         public IActionResult Details(int id)
         {
-            var movie = movies.FirstOrDefault(mov => mov.Id == id);
+            var movie = GetMovies().FirstOrDefault(mov => mov.Id == id);
             if (movie == null)
             {
                 return NotFound();
@@ -51,6 +48,15 @@ namespace VidlyCoreAuth.Controllers
                 Customers = customers
             };
             return View(viewModel);
+        }
+
+        private List<Movie> GetMovies()
+        {
+            return new List<Movie>()
+            {
+                new Movie { Name = "Shrek", Id = 1 },
+                new Movie { Name = "Wall-e" , Id = 2}
+            };
         }
     }
 }
