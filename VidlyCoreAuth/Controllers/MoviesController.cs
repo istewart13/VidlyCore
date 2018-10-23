@@ -10,6 +10,32 @@ namespace VidlyCoreAuth.Controllers
 {
     public class MoviesController : Controller
     {
+        private List<Movie> movies = new List<Movie>() {
+                new Movie { Name = "Shrek", Id = 1 },
+                new Movie { Name = "Wall-e" , Id = 2}
+            };
+
+        public IActionResult Index()
+        {
+            var viewModel = new MovieViewModel()
+            {
+                Movies = movies
+            };
+
+            return View(viewModel);
+        }
+
+        [Route("movies/details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var movie = movies.FirstOrDefault(mov => mov.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
+
         // GET: Movies/Random
         public IActionResult Random()
         {
