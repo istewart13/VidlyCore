@@ -26,7 +26,7 @@ namespace VidlyCoreAuth.Controllers
 
         public IActionResult Index()
         {
-            var customers = _context.Customers.ToList();
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 
             var viewModel = new CustomerViewModel() {
                 Customers = customers
