@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using VidlyCoreAuth.Data;
 using VidlyCoreAuth.Models;
 using VidlyCoreAuth.ViewModels;
 
@@ -10,9 +12,21 @@ namespace VidlyCoreAuth.Controllers
 {
     public class MoviesController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public MoviesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();   
+        }
+
         public IActionResult Index()
         {
-            var movies = GetMovies();
+            var movies = _context.Movies.Include(m => m.Genre).ToList();
 
             var viewModel = new MovieViewModel()
             {
@@ -25,7 +39,7 @@ namespace VidlyCoreAuth.Controllers
         [Route("movies/details/{id}")]
         public IActionResult Details(int id)
         {
-            var movie = GetMovies().FirstOrDefault(mov => mov.Id == id);
+            var movie = _context.Movies.Include(m => m.Genre).FirstOrDefault(mov => mov.Id == id);
             if (movie == null)
             {
                 return NotFound();
@@ -48,15 +62,6 @@ namespace VidlyCoreAuth.Controllers
                 Customers = customers
             };
             return View(viewModel);
-        }
-
-        private List<Movie> GetMovies()
-        {
-            return new List<Movie>()
-            {
-                new Movie { Name = "Shrek", Id = 1 },
-                new Movie { Name = "Wall-e" , Id = 2}
-            };
         }
     }
 }
