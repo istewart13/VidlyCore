@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VidlyCoreAuth.Dto;
 using VidlyCoreAuth.Models;
 
 namespace VidlyCoreAuth.Services
@@ -11,7 +12,8 @@ namespace VidlyCoreAuth.Services
     {
         public MappingProfile()
         {
-            MappingProfile.CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Customer, CustomerDto>();
+            CreateMap<CustomerDto, Customer>();
         }
     }
 }
