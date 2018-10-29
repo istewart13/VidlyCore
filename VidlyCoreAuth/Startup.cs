@@ -11,17 +11,18 @@ using Microsoft.Extensions.DependencyInjection;
 using VidlyCoreAuth.Data;
 using VidlyCoreAuth.Models;
 using VidlyCoreAuth.Services;
+using AutoMapper;
 
 namespace VidlyCoreAuth
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public Microsoft.Extensions.Configuration.IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -35,6 +36,8 @@ namespace VidlyCoreAuth
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddAutoMapper();
 
             services.AddMvc();
         }
