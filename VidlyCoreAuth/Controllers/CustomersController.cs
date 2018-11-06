@@ -26,7 +26,7 @@ namespace VidlyCoreAuth.Controllers
 
         public IActionResult New()
         {
-            var membershipTypes = _context.MembershipType.ToList();
+            var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel
             {
                 MembershipTypes = membershipTypes
@@ -90,7 +90,7 @@ namespace VidlyCoreAuth.Controllers
             var viewModel = new CustomerFormViewModel
             {
                 Customer = customer,
-                MembershipTypes = _context.MembershipType.ToList()
+                MembershipTypes = _context.MembershipTypes.ToList()
             };
             return View("CustomerForm", viewModel);
         }
