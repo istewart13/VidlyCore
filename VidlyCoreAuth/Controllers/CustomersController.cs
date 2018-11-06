@@ -35,9 +35,21 @@ namespace VidlyCoreAuth.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Customer customer)
+        public IActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (customer.Id == 0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+                var mappedCustomer = _mapper.Map<customer, CustomerInDb>(customer);
+                customerInDb.Name = customer.Name,
+                customerInDb.Birthdate = customer.Birthdate,
+                customerInDb.
+            }
+            
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customers");
