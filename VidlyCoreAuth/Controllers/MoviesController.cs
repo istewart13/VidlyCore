@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -54,6 +54,24 @@ namespace VidlyCoreAuth.Controllers
                 return NotFound();
             }
             return View(movie);
+        }
+
+        [Route("movies/edit/{id}")]
+        public IActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genres = _context.Genres.ToList()
+            };
+            return View("MovieForm", viewModel);
         }
 
         // GET: Movies/Random

@@ -1,4 +1,4 @@
-@model VidlyCoreAuth.ViewModels.MovieViewModel
+﻿@model VidlyCoreAuth.ViewModels.MovieViewModel
 
 @{
     ViewData["Title"] = "Movies";
@@ -32,7 +32,7 @@ else
             {
                 <tr>
                     <td>
-                        <a asp-controller="Movies" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                        <a asp-controller="Movies" asp-action="Edit" asp-route-id="@item.Id">@item.Name</a>
                     </td>
                     <td>
                         @item.Genre.Name
