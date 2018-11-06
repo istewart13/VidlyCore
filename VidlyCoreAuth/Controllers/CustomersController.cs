@@ -44,10 +44,10 @@ namespace VidlyCoreAuth.Controllers
             else
             {
                 var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
-                var mappedCustomer = _mapper.Map<customer, CustomerInDb>(customer);
-                customerInDb.Name = customer.Name,
-                customerInDb.Birthdate = customer.Birthdate,
-                customerInDb.
+                customerInDb.Name = customer.Name;
+                customerInDb.Birthdate = customer.Birthdate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
             }
             
             _context.SaveChanges();
