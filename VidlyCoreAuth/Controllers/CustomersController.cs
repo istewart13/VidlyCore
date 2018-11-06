@@ -27,11 +27,11 @@ namespace VidlyCoreAuth.Controllers
         public IActionResult New()
         {
             var membershipTypes = _context.MembershipType.ToList();
-            var viewModel = new NewCustomerViewModel
+            var viewModel = new CustomerFormViewModel
             {
                 MembershipTypes = membershipTypes
             };
-            return View(viewModel);
+            return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
@@ -63,6 +63,24 @@ namespace VidlyCoreAuth.Controllers
                 return NotFound();
             }
             return View(customer);
+        }
+
+        [Route("customers/edit/{id}")]
+        public IActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipType.ToList()
+            };
+            return View("CustomerForm", viewModel);
         }
     }
 }
