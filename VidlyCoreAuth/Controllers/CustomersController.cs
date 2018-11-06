@@ -24,6 +24,15 @@ namespace VidlyCoreAuth.Controllers
             _context.Dispose();
         }
 
+        public IActionResult New()
+        {
+            var membershipTypes = _context.MembershipType.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View(viewModel);
+        }
 
         [HttpPost]
         public IActionResult Create(Customer customer)
