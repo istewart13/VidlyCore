@@ -1,4 +1,4 @@
-﻿@model VidlyCoreAuth.ViewModels.MovieViewModel
+@model VidlyCoreAuth.ViewModels.MovieViewModel
 
 @{
     ViewData["Title"] = "Movies";
@@ -6,6 +6,8 @@
 }
 
 <h2>@ViewData["Title"]</h2>
+
+<a asp-controller="Movies" asp-action="New" class="btn btn-primary">New Movie</a>
 
 @if (!Model.Movies.Any())
 {

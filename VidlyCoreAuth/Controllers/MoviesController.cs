@@ -36,6 +36,15 @@ namespace VidlyCoreAuth.Controllers
             return View(viewModel);
         }
 
+        public IActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel {
+                Genres = genres
+            };
+            return View("MovieForm", viewModel);
+        }
+
         [Route("movies/details/{id}")]
         public IActionResult Details(int id)
         {
